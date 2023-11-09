@@ -5,7 +5,7 @@
 
 import { METADATA } from "../constants";
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -41,21 +41,21 @@ export default function Home() {
   const [isDesktop, setisDesktop] = useState(true);
 
   let timer: NodeJS.Timeout = null;
-
-  const debouncedDimensionCalculator = () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      const isDesktopResult =
-        typeof window.orientation === "undefined" &&
-        navigator.userAgent.indexOf("IEMobile") === -1;
-
-      window.history.scrollRestoration = "manual";
-
-      setisDesktop(isDesktopResult);
-    }, DEBOUNCE_TIME);
-  };
-
+  const timerRef = useRef<NodeJS.Timeout>(null);
   useEffect(() => {
+    const debouncedDimensionCalculator = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const isDesktopResult =
+          typeof window.orientation === "undefined" &&
+          navigator.userAgent.indexOf("IEMobile") === -1;
+
+        window.history.scrollRestoration = "manual";
+
+        setisDesktop(isDesktopResult);
+      }, DEBOUNCE_TIME);
+    };
+
     debouncedDimensionCalculator();
 
     window.addEventListener("resize", debouncedDimensionCalculator);
