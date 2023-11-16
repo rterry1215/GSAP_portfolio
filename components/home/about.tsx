@@ -63,7 +63,7 @@ const AboutSection = () => {
   }, [quoteRef, targetSection]);
 
   const renderQuotes = (): React.ReactNode => (
-    <h1 ref={quoteRef} className="font-medium text-3xl sm:text-4xl md:text-6xl">
+    <h1 ref={quoteRef} className="font-serif font-semibold text-3xl sm:text-4xl md:text-6xl">
       <span
         className={`about-1 leading-tight ${
           willChange ? "will-change-opacity" : ""
@@ -71,7 +71,7 @@ const AboutSection = () => {
       >
         I am a passionate UI Engineer who bridges the gap between development
         and design.{" "}
-      </span>
+      </span><br></br>
       <span
         className={`about-2 leading-tight ${
           willChange ? "will-change-opacity" : ""
